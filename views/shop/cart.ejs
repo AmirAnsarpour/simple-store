@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %> <%- include('../includes/heading.ejs') %>
+<%- include('../includes/navigation.ejs') %>
+<!------------------------------------------------>
+
+<main>
+  <% if(products.length > 0) { %>
+  <ul class="cart__item-list">
+    <% products.forEach(product => { %>
+    <li class="cart__item">
+      <div>
+        <img
+          src="<%= product.productId.imageURL %>"
+          alt="<%= product.productId.title %>"
+          class="img-thumbnail"
+        />
+      </div>
+      <h1><%= product.productId.title %></h1>
+      <h2><%= product.quantity %></h2>
+      <form action="cart-delete-item" method="post">
+        <button type="submit" class="btn btn-danger">حذف</button>
+        <input
+          type="hidden"
+          value="<%= product.productId._id %>"
+          name="productID"
+        />
+      </form>
+    </li>
+    <% }); %>
+  </ul>
+  <ul class="row">
+    <div class="container">
+      <div class="centered">
+        <form action="/create-order" method="post">
+          <button type="submit" class="btn btn-primary">سفارش محصولات</button>
+        </form>
+      </div>
+    </div>
+  </ul>
+  <% }else{ %>
+  <h1 class="centered">سبد خرید خالی است.</h1>
+  <% } %>
+</main>
+<!------------------------------------------------>
+
+<%- include('../includes/end.ejs') %>
