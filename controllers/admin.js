@@ -1,4 +1,3 @@
-const product = require("../models/product");
 const Product = require("../models/product");
 
 exports.getProducts = (req, res) => {
@@ -90,7 +89,7 @@ exports.postEditProduct = (req, res) => {
     })
     .then((result) => {
       console.log("updated Product...");
-      res.redirect("/");
+      res.redirect("/admin/products");
     });
 };
 

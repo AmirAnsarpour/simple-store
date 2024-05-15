@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 const User = require("./models/user");
 
@@ -13,14 +14,18 @@ app.set("views", "views");
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+const authRoutes = require("./routes/auth");
 
+// midlle
 app.use(
   bodyParser.urlencoded({
     extended: false,
   })
 );
-
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  session({ secret: "my secret", resave: false, saveUninitialized: false })
+);
 
 app.use((req, res, next) => {
   User.findById("66409666553feefac4540310")
@@ -33,6 +38,7 @@ app.use((req, res, next) => {
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
+app.use(authRoutes);
 
 mongoose
   .connect("mongodb://localhost/Shop")
