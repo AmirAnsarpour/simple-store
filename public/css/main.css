@@ -218,3 +218,28 @@ form {
   height: 310px;
   margin-bottom: 0px !important;
 }
+.navBTN {
+  color: rgba(228, 228, 228, 0.83);
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+}
+.navBTN:hover {
+  color: rgba(228, 228, 228, 0.554);
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+}
+.navBTN:focus {
+  outline: none;
+  color: rgba(228, 228, 228, 0.554);
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+}

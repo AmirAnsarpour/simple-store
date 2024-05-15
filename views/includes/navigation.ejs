@@ -11,6 +11,7 @@
           >محصولات</a
         >
       </li>
+      <% if(isAuth) {%>
       <li class="nav-item">
         <a class="nav-link <%= path==='/cart' ? 'active' : '' %>" href="/cart"
           >سبد خرید</a
@@ -22,7 +23,6 @@
           href="/orders"
           >سفارشات</a
         >
-        <% if(isAuth) {%>
       </li>
       <li class="nav-item">
         <a class="nav-link <%= path==='/admin' ? 'active' : '' %>" href="/admin"
@@ -44,12 +44,21 @@
         >
       </li>
       <% } %>
-      <li class="nav-item">
-        <a
-          class="nav-link <%= path==='/login' ? 'active' : '' %>"
-          href="/login"
-          >ورود</a
-      </li>
     </ul>
   </div>
+  <ul class="navbar-nav">
+    <% if(!isAuth){ %>
+    <li class="nav-item">
+      <a class="navBTN <%= path==='/login' ? 'active' : '' %>" href="/login"
+        >ورود</a
+      >
+    </li>
+    <% }else{ %>
+    <li class="nav-item">
+      <form action="/logout" method="post">
+        <button class="navBTN" type="submit">خروج</button>
+      </form>
+    </li>
+    <% } %>
+  </ul>
 </nav>

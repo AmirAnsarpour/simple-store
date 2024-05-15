@@ -3,11 +3,17 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 const User = require("./models/user");
+const MongoDB_URI = "mongodb://localhost/Shop";
 
 const PORT = 3003;
 const app = express();
+const store = new MongoDBStore({
+  uri: MongoDB_URI,
+  collection: "session",
+});
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -24,11 +30,20 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
-  session({ secret: "my secret", resave: false, saveUninitialized: false })
+  session({
+    secret: "my secret",
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+  })
 );
 
 app.use((req, res, next) => {
-  User.findById("66409666553feefac4540310")
+  if (!req.session.user) {
+    return next();
+  }
+  // User.findById("66409666553feefac4540310")
+  User.findById(req.session.user._id)
     .then((user) => {
       req.user = user;
       next();
@@ -41,7 +56,7 @@ app.use(shopRoutes);
 app.use(authRoutes);
 
 mongoose
-  .connect("mongodb://localhost/Shop")
+  .connect(MongoDB_URI)
   .then((result) => {
     User.findOne().then((user) => {
       if (!user) {
