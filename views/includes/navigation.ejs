@@ -49,13 +49,26 @@
   <ul class="navbar-nav">
     <% if(!isAuth){ %>
     <li class="nav-item">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <input type="hidden" name="_method" value="DELETE" />
       <a class="navBTN <%= path==='/login' ? 'active' : '' %>" href="/login"
         >ورود</a
+      >
+    </li>
+    <li class="nav-item">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <input type="hidden" name="_method" value="DELETE" />
+      <a
+        class="navBTN pl-3<%= path==='/signup' ? 'active' : '' %>"
+        href="/signup"
+        >ثبت نام</a
       >
     </li>
     <% }else{ %>
     <li class="nav-item">
       <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <input type="hidden" name="_method" value="DELETE" />
         <button class="navBTN" type="submit">خروج</button>
       </form>
     </li>

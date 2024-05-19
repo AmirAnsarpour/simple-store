@@ -8,6 +8,8 @@
       method="post"
     >
       <div class="form-group">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <input type="hidden" name="_method" value="DELETE" />
         <label for="exampleInputEmail1">عنوان</label>
         <input
           type="text"

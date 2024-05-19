@@ -23,6 +23,8 @@
           >ویرایش</a
         >
         <form action="/admin/delete-product" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <input type="hidden" name="_method" value="DELETE" />
           <input type="hidden" value="<%= product._id %>" name="productID" />
           <button class="btn btn-danger" type="submit">حذف</button>
         </form>
